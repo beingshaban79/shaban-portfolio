@@ -14,15 +14,7 @@ export const profile = {
   /** Shown in the hero headline. */
   headline: "I build mobile apps that ship.",
 
-  /**
-   * One-line value proposition under the headline.
-   *
-   * Deliberately frontend-first. The earlier version led with "React Native and
-   * native iOS developer" and then claimed the backend flatly, which overstated
-   * both: iOS came after React Native, and the Laravel work was delivered with
-   * AI assistance rather than from years of PHP. Claiming only what survives an
-   * interview matters more than claiming the most.
-   */
+  /** One-line value proposition under the headline. Frontend-first, by design. */
   pitch:
     "React Native developer with 3+ years turning Figma files into production apps on the App Store and Play Store. Frontend is my core; when a product needs the backend too, I build that — Laravel APIs, MySQL schema, admin dashboards — with AI tooling and my own review.",
 
@@ -42,18 +34,9 @@ export const profile = {
   stats: [
     { value: "3+", label: "Years building mobile" },
     /**
-     * WHY THERE IS NO "30+" HERE.
-     *
-     * The true total across three years is thirty-plus codebases, but a stat
-     * has to survive the follow-up question. Asked to walk through thirty apps
-     * from a three-year career, the honest answer is "I remember the recent
-     * ones clearly" — and the number then costs more credibility than it
-     * bought. Every figure on this page is one that can be talked through for
-     * an hour.
-     *
-     * 15+ built from scratch is the stronger claim anyway: unusual for three
-     * years, and specific. Breadth is covered in the bio, in prose, without a
-     * number attached to it.
+     * Both numbers on purpose: a total alone invites "doing what?", so the
+     * from-scratch count answers it before it's asked. Every figure here is one
+     * that can be talked through in detail.
      */
     { value: "15+", label: "Apps built from scratch" },
     { value: "8", label: "Released to the stores" },

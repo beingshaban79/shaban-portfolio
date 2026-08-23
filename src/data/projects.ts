@@ -299,12 +299,8 @@ export const projects: Project[] = [
     screenshotNote: "Screen capture disabled in-app",
     video: null,
     /**
-     * No `live` flag needed any more — the store links earn the badge on their
-     * own, and unlike a flag a visitor can click them.
-     *
-     * Region-neutral App Store URL (no /pk/ or /us/ segment): Apple redirects
-     * to the viewer's own storefront, so a recruiter in Berlin or Dubai lands
-     * on a page they can actually install from.
+     * Region-neutral App Store URL (no country segment): Apple redirects each
+     * visitor to their own storefront.
      */
     links: {
       playStore: "https://play.google.com/store/apps/details?id=lantis.silant.app",

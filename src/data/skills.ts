@@ -44,12 +44,7 @@ export const skillGroups: SkillGroup[] = [
     primary: ["React Native (CLI)", "React Native (Expo)", "JavaScript"],
   },
   {
-    /**
-     * Split out from the core stack on purpose. Listing SwiftUI and UIKit
-     * beside React Native implied equal depth in all three; they came later and
-     * the shipped volume is smaller. Saying so plainly is what makes the core
-     * claim above credible.
-     */
+    /** Separate from the core stack: real shipped work, less depth. */
     id: "cross-platform",
     title: "Also Build In",
     icon: "smartphone",

@@ -51,10 +51,6 @@ export function Projects() {
         eyebrow="Selected work"
         title="Things I've"
         accent="shipped"
-        // Names the denominator that's actually defensible. Measuring the nine
-        // cards against the from-scratch count is a claim that survives being
-        // asked about; measuring them against every codebase ever touched
-        // isn't.
         description="Thirteen of the fifteen-odd I've built from scratch. What I built, the stack it runs on, and exactly which parts were mine, spelled out rather than left to inference."
       />
 
