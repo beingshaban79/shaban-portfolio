@@ -1,0 +1,243 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------------- */
+/*  DESIGN TOKENS                                                            */
+/*  One accent gradient (violet -> cyan) used everywhere. One signal colour   */
+/*  (emerald) reserved for availability / live / metrics. Nothing else.       */
+/* ------------------------------------------------------------------------- */
+
+@theme {
+  /* Base — near-black with a violet undertone, never pure #000 */
+  --color-night: #0a0a0f;
+  --color-night-raised: #0d0d14;
+  --color-night-panel: #12121c;
+
+  /* Primary accent — electric indigo/violet */
+  --color-violet-accent: #6d5dfc;
+  --color-violet-bright: #8b5cf6;
+
+  /* Secondary accent — cyan/teal */
+  --color-cyan-accent: #22d3ee;
+  --color-teal-accent: #2dd4bf;
+
+  /* Signal — used sparingly: availability dot, live badges, metrics */
+  --color-signal: #34d399;
+
+  /* Text */
+  --color-ink: #f5f5f7;
+  --color-ink-muted: #a1a1aa;
+  /* 5.19:1 on --color-night. #71717a was 4.08:1 and failed WCAG AA. */
+  --color-ink-faint: #82828c;
+
+  /* Hairlines on glass */
+  --color-edge: rgba(255, 255, 255, 0.08);
+  --color-edge-strong: rgba(255, 255, 255, 0.14);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-inter), ui-sans-serif, sans-serif;
+
+  --radius-panel: 1.25rem;
+
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-marquee: marquee 42s linear infinite;
+  --animate-pulse-ring: pulse-ring 2.4s var(--ease-out-soft) infinite;
+  --animate-float-slow: float-slow 9s ease-in-out infinite;
+  --animate-shimmer: shimmer 2.6s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.85); opacity: 0.8; }
+  70% { transform: scale(2.2); opacity: 0; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+/* ------------------------------------------------------------------------- */
+/*  BASE                                                                     */
+/* ------------------------------------------------------------------------- */
+
+@layer base {
+  * {
+    border-color: var(--color-edge);
+  }
+
+  html {
+    /* Anchor scrolling is handled by <SmoothAnchors> with a fixed duration.
+       Chrome's CSS smooth scroll scales with distance — a footer-to-top jump
+       measured 1.84s, which reads as a broken link. */
+    scroll-behavior: auto;
+    /* Fallback offset for native anchor jumps (no JS, or a hash typed straight
+       into the address bar). Deliberately small: <Section> already has 96–128px
+       of its own top padding, so the old 6rem here stacked on top of that and
+       pushed the heading ~224px down the viewport. */
+    scroll-padding-top: 2rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-night);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  /* Film grain — flattens the gradients so they read as material, not CSS.
+     Cheap: one tiled SVG, no repaint, no layout cost. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.032;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--color-violet-accent);
+    color: #fff;
+  }
+
+  /* Visible, on-brand focus ring — keyboard nav must never be a mystery */
+  :focus-visible {
+    outline: 2px solid var(--color-cyan-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Sections receive programmatic focus from <SmoothAnchors> so the skip link
+     and nav actually move the keyboard position. They aren't interactive, so
+     they shouldn't paint a focus ring. */
+  section[tabindex="-1"]:focus,
+  section[tabindex="-1"]:focus-visible {
+    outline: none;
+  }
+
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: var(--color-night); }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--color-violet-accent), var(--color-cyan-accent));
+    border-radius: 99px;
+    border: 3px solid var(--color-night);
+  }
+}
+
+/* ------------------------------------------------------------------------- */
+/*  UTILITIES                                                                */
+/* ------------------------------------------------------------------------- */
+
+@utility text-gradient {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-violet-bright) 0%,
+    var(--color-violet-accent) 35%,
+    var(--color-cyan-accent) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  /* descenders get clipped without this */
+  padding-bottom: 0.08em;
+}
+
+/* Frosted panel — the single surface treatment used site-wide */
+@utility glass {
+  background: linear-gradient(
+    155deg,
+    rgba(255, 255, 255, 0.055) 0%,
+    rgba(255, 255, 255, 0.018) 45%,
+    rgba(255, 255, 255, 0.005) 100%
+  );
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid var(--color-edge);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.05) inset,
+    0 18px 44px -24px rgba(0, 0, 0, 0.85);
+}
+
+/* Gradient hairline border via mask — no pseudo-element juggling */
+@utility gradient-border {
+  position: relative;
+}
+
+@utility hairline-gradient {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--color-violet-bright) 55%, transparent),
+    transparent 45%,
+    color-mix(in oklab, var(--color-cyan-accent) 45%, transparent)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+@utility accent-gradient {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-violet-bright),
+    var(--color-violet-accent) 40%,
+    var(--color-cyan-accent)
+  );
+}
+
+/* Section framing */
+@utility section-shell {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .section-shell { padding-inline: 2rem; }
+}
+
+/* Respect the OS setting — all decorative motion stops. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
