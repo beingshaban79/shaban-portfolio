@@ -49,6 +49,7 @@ export function ProjectCard({
               glow={false}
               note={cover ? undefined : project.screenshotNote}
               bare={project.storeGraphics}
+              bareAspect={project.storeGraphicsAspect}
             />
           </div>
 

@@ -76,6 +76,8 @@ export type Project = {
    * They render as plain rounded 9:16 cards instead of inside the phone mockup.
    */
   storeGraphics?: boolean;
+  /** Height ÷ width of those store graphics, when they aren't 9:16 (e.g. 2796 / 1290). */
+  storeGraphicsAspect?: number;
   /** Set once you have footage — see step 3 above. */
   video: string | null;
   links: {
@@ -177,56 +179,53 @@ export const projects: Project[] = [
     },
   },
   {
-    slug: "lumo-ai-photo-editor",
-    name: "Lumo — AI Photo Editor",
+    slug: "pixlush",
+    name: "PixLush — AI Photo Editor",
     pitch:
-      "AI photo editing with natural-language prompts, on-device batch processing, and shareable edit recipes.",
+      "A full photo editor that runs on your phone, plus AI tools for the edits a phone can't do alone. Live on the App Store.",
     description: [
-      "A photo editor that pairs conventional tools — filters, adjustments, crop, text, stickers, frames — with AI transformations driven by plain language. A user picks a photo, describes the change they want, and the request goes to a trained model hosted on Hugging Face; the edited image comes back into the same editor. The AI tab also exposes direct transformations like adding facial hair or recolouring clothing without the user having to phrase a prompt at all.",
-      "Not every edit needs a model. Requests that map to supported local operations are handled on-device and free, with the AI path reserved for what actually requires it — so common edits are instant and don't burn an inference call.",
-      "Two features drove most of the architecture. Batch editing applies one look across multiple photos, and it runs on the device rather than server-side — a cloud pipeline would bill per image, which doesn't survive contact with a user processing a large library. Looks turns an editing workflow into a shareable code: the code carries the full recipe, so another user pastes it and reproduces the exact edit. Nothing is uploaded and it resolves offline, which meant designing the code as a self-contained serialised format rather than a pointer to a stored server-side preset.",
-      "Rounded out with an in-app camera with live filter preview, subscription tiers and in-app purchases gating Pro features, a rewarded-ad path to unlock a Pro edit once, and a profile section for account and purchase management.",
+      "PixLush started life as Lumo and has grown into a full product. It's two things in one app: a complete photo editor that works entirely on the phone, and a set of AI tools for the jobs a phone can't do by itself. You can open it and start editing with no account at all.",
+      "The on-device editor covers filters, light and colour adjustments, portrait retouching, crop with ready-made social sizes, stickers, text, frames and templates. Background removal, blur and colour run on a model that lives on the device, and cut-outs export as transparent PNGs. Batch editing applies one look to many photos at once, and Looks turn an edit into a short code someone else can paste to get the exact same result.",
+      "The AI side lets you describe a change in plain words and get it back, erase or replace anything you paint over, create an image from a description, and upscale small photos. These are the only features that send anything off the phone, and only after the user agrees, so the privacy story stays simple. The latest version adds motion effects that turn a photo into a short video, collages, AI avatars, wardrobe and captions, and an invite-a-friend reward.",
+      "Keeping most of the work on the device was the core decision. Everyday edits are instant and free, and AI calls are saved for the edits that really need them, which keeps running costs under control on a weekly subscription.",
     ],
     role:
-      "Built the application in React Native and Expo — the full editing UI and tooling, the Hugging Face model integration and the free local-edit path, the on-device batch pipeline, the Looks edit-code encode/decode and sharing, the in-app camera, and the subscription and in-app purchase flow.",
+      "Built the app in React Native and Expo: the full editing UI and tools, the on-device background removal and batch pipeline, the Looks share codes, the AI features and their consent flow, the free and Pro tiers with subscriptions, and the App Store release.",
     track: "Product Work",
-    platforms: ["iOS", "Android"],
+    platforms: ["iOS"],
     tech: [
       "React Native",
       "Expo",
-      "Hugging Face API",
-      "AI image transformation",
-      "On-device batch processing",
-      "In-App Purchases",
-      "Subscriptions",
-      "Rewarded ads",
+      "On-device ML (background removal)",
+      "Generative AI image editing",
+      "Batch processing",
+      "Subscriptions (in-app purchases)",
+      "App Store release",
     ],
     context: "Astapor Technologies",
     year: "2026",
+    /**
+     * Official App Store graphics: they already include an iPhone frame and a
+     * caption, so they render without our phone mockup.
+     */
     screenshots: [
-      { src: "/projects/lumo-ai-photo-editor/01-studio-home.webp", alt: "Lumo studio home screen with the Just Ask AI entry point and editor shortcut" },
-      { src: "/projects/lumo-ai-photo-editor/02-just-ask-ai-prompt.webp", alt: "Just Ask screen: a loaded photo with a natural-language prompt field and free instant quick-edit chips" },
-      { src: "/projects/lumo-ai-photo-editor/03-ai-editor-facial-hair-clothing.webp", alt: "AI editor tab offering facial hair transformations and clothing colour changes" },
-      { src: "/projects/lumo-ai-photo-editor/04-filters.webp", alt: "Filter tab showing filters suggested for the current photo alongside the full filter set" },
-      { src: "/projects/lumo-ai-photo-editor/05-adjust.webp", alt: "Adjust tab with brightness, contrast, saturation and warmth sliders" },
-      { src: "/projects/lumo-ai-photo-editor/06-crop.webp", alt: "Crop tab with aspect ratio presets, straighten and orientation controls" },
-      { src: "/projects/lumo-ai-photo-editor/07-stickers.webp", alt: "Sticker tab with shape, nature, party and symbol categories" },
-      { src: "/projects/lumo-ai-photo-editor/08-text.webp", alt: "Text tab with a caption composited onto the photo" },
-      { src: "/projects/lumo-ai-photo-editor/09-frames-pro.webp", alt: "Frame tab showing the Pro upgrade prompt for hand-drawn frames" },
-      { src: "/projects/lumo-ai-photo-editor/10-batch-editing.webp", alt: "Batch screen applying a single look across multiple selected photos on-device" },
-      { src: "/projects/lumo-ai-photo-editor/11-looks-edit-codes.webp", alt: "Looks screen for pasting a shared edit code and managing saved looks" },
-      { src: "/projects/lumo-ai-photo-editor/12-in-app-camera.webp", alt: "In-app camera with live filter preview and timer controls" },
-      { src: "/projects/lumo-ai-photo-editor/13-pro-subscription.webp", alt: "Profile and Lumo Pro subscription tiers with restore purchases" },
+      { src: "/projects/pixlush/01-home-just-ask.jpg", alt: "Store graphic: PixLush home with the Just ask prompt, Create an image and Erase or replace" },
+      { src: "/projects/pixlush/02-one-tap-ai-edits.jpg", alt: "Store graphic: one-tap AI edits for beards, moustaches and clothing colour" },
+      { src: "/projects/pixlush/03-backgrounds.jpg", alt: "Store graphic: blur, colour or cut out the background" },
+      { src: "/projects/pixlush/04-filters.jpg", alt: "Store graphic: filter templates applied to a photo" },
+      { src: "/projects/pixlush/05-light-and-colour.jpg", alt: "Store graphic: brightness, contrast and an Enhance button" },
+      { src: "/projects/pixlush/06-crop.jpg", alt: "Store graphic: crop with Instagram, Story and other social sizes" },
+      { src: "/projects/pixlush/07-stickers.jpg", alt: "Store graphic: stickers and shapes on a photo" },
+      { src: "/projects/pixlush/08-text.jpg", alt: "Store graphic: adding styled text to a photo" },
+      { src: "/projects/pixlush/09-batch.jpg", alt: "Store graphic: batch editing, one look applied to many photos on the phone" },
     ],
+    storeGraphics: true,
+    storeGraphicsAspect: 2796 / 1290,
     video: null,
     links: {
-      // Add the store listing once it's live:
-      // playStore: "https://play.google.com/store/apps/details?id=...",
-      // appStore: "https://apps.apple.com/app/id...",
+      // Region-neutral: Apple redirects to the viewer's own storefront.
+      appStore: "https://apps.apple.com/app/pixlush-ai-photo-editor/id6805793117",
     },
-    // Not featured. Tapy Aman is the only featured project — one badge carries
-    // more weight than two, and Lumo keeps its position at the front of the
-    // grid regardless, since order here drives order on the page.
   },
   {
     slug: "pay-it-forward",

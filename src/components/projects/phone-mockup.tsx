@@ -46,6 +46,7 @@ export function PhoneMockup({
   glow = true,
   note,
   bare = false,
+  bareAspect = 1920 / 1080,
   className,
 }: {
   src?: string;
@@ -65,14 +66,15 @@ export function PhoneMockup({
    * 9:16 card instead of putting a phone inside our phone.
    */
   bare?: boolean;
+  /** Height ÷ width of the store graphics (defaults to 9:16). */
+  bareAspect?: number;
   className?: string;
 }) {
   const s = SIZES[size];
   const height = Math.round(s.w * ASPECT);
 
   if (bare && src) {
-    // Store graphics are 1080×1920 (9:16).
-    const bareHeight = Math.round((s.w * 1920) / 1080);
+    const bareHeight = Math.round(s.w * bareAspect);
     return (
       <div className={cn("relative shrink-0", className)} style={{ width: s.w }}>
         {glow && (

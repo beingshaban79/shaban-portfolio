@@ -17,6 +17,7 @@ export function ScreenshotCarousel({
   size = "md",
   note,
   bare = false,
+  bareAspect,
   className,
 }: {
   shots: { src: string; alt: string }[];
@@ -25,6 +26,7 @@ export function ScreenshotCarousel({
   note?: string;
   /** Screenshots are store graphics with their own frame — see PhoneMockup. */
   bare?: boolean;
+  bareAspect?: number;
   className?: string;
 }) {
   const track = React.useRef<HTMLDivElement>(null);
@@ -79,6 +81,7 @@ export function ScreenshotCarousel({
               size={size}
               priority={i === 0}
               bare={bare}
+              bareAspect={bareAspect}
             />
           </div>
         ))}

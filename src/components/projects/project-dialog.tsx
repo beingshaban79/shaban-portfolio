@@ -118,6 +118,7 @@ export function ProjectDialog({
             size="md"
             note={project.screenshotNote}
             bare={project.storeGraphics}
+              bareAspect={project.storeGraphicsAspect}
           />
         </div>
 
