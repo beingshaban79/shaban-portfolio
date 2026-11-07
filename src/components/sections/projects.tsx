@@ -51,7 +51,7 @@ export function Projects() {
         eyebrow="Selected work"
         title="Things I've"
         accent="shipped"
-        description="Thirteen of the fifteen-odd I've built from scratch. What I built, the stack it runs on, and exactly which parts were mine, spelled out rather than left to inference."
+        description={`${projects.length} apps and games: client work, product work, and the games and tools I build under my own studio. What I built, the stack it runs on, and exactly which parts were mine.`}
       />
 
       <ul className="grid list-none grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

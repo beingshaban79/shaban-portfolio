@@ -19,7 +19,7 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#0a0a0f",
+          background: "#0c0a09",
           padding: 72,
           position: "relative",
         }}
@@ -34,7 +34,7 @@ export default function OpengraphImage() {
             height: 680,
             borderRadius: 9999,
             background:
-              "radial-gradient(circle, rgba(109,93,252,0.42), rgba(109,93,252,0) 70%)",
+              "radial-gradient(circle, rgba(249,115,22,0.42), rgba(249,115,22,0) 70%)",
           }}
         />
         <div
@@ -46,7 +46,7 @@ export default function OpengraphImage() {
             height: 620,
             borderRadius: 9999,
             background:
-              "radial-gradient(circle, rgba(34,211,238,0.3), rgba(34,211,238,0) 70%)",
+              "radial-gradient(circle, rgba(251,191,36,0.3), rgba(251,191,36,0) 70%)",
           }}
         />
 
@@ -61,8 +61,8 @@ export default function OpengraphImage() {
               alignItems: "center",
               justifyContent: "center",
               background:
-                "linear-gradient(135deg, #8b5cf6 0%, #6d5dfc 45%, #22d3ee 100%)",
-              color: "#fff",
+                "linear-gradient(135deg, #fb7185 0%, #f97316 45%, #fbbf24 100%)",
+              color: "#1c0a02",
               fontSize: 22,
               fontWeight: 700,
             }}
@@ -100,7 +100,7 @@ export default function OpengraphImage() {
             style={{
               fontSize: 26,
               letterSpacing: 6,
-              color: "#a1a1aa",
+              color: "#a8a29e",
               textTransform: "uppercase",
             }}
           >
@@ -111,7 +111,7 @@ export default function OpengraphImage() {
               fontSize: 74,
               lineHeight: 1.04,
               fontWeight: 700,
-              color: "#f5f5f7",
+              color: "#fafaf9",
               maxWidth: 940,
               letterSpacing: -2.5,
             }}
@@ -123,7 +123,7 @@ export default function OpengraphImage() {
               fontSize: 38,
               fontWeight: 600,
               background:
-                "linear-gradient(100deg, #8b5cf6, #6d5dfc 40%, #22d3ee)",
+                "linear-gradient(100deg, #fb7185, #f97316 40%, #fbbf24)",
               backgroundClip: "text",
               WebkitBackgroundClip: "text",
               color: "transparent",
@@ -140,7 +140,7 @@ export default function OpengraphImage() {
             alignItems: "center",
             gap: 28,
             fontSize: 22,
-            color: "#71717a",
+            color: "#8c857e",
             borderTop: "1px solid rgba(255,255,255,0.09)",
             paddingTop: 26,
           }}

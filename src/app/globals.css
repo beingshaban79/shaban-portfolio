@@ -2,32 +2,40 @@
 
 /* ------------------------------------------------------------------------- */
 /*  DESIGN TOKENS                                                            */
-/*  One accent gradient (violet -> cyan) used everywhere. One signal colour   */
-/*  (emerald) reserved for availability / live / metrics. Nothing else.       */
+/*  "Midnight ember": one accent gradient (rose -> orange -> amber) used      */
+/*  everywhere. One signal colour (emerald) reserved for availability / live  */
+/*  / metrics. Nothing else.                                                  */
+/*                                                                           */
+/*  The token names (violet-*, cyan-*) are kept from the original violet/cyan */
+/*  theme so no component had to change: violet-* is now the primary orange  */
+/*  and cyan-* the amber end of the gradient.                                */
 /* ------------------------------------------------------------------------- */
 
 @theme {
-  /* Base — near-black with a violet undertone, never pure #000 */
-  --color-night: #0a0a0f;
-  --color-night-raised: #0d0d14;
-  --color-night-panel: #12121c;
+  /* Base — warm near-black, never pure #000 */
+  --color-night: #0c0a09;
+  --color-night-raised: #110e0c;
+  --color-night-panel: #18130f;
 
-  /* Primary accent — electric indigo/violet */
-  --color-violet-accent: #6d5dfc;
-  --color-violet-bright: #8b5cf6;
+  /* Primary accent — ember orange (violet-bright is the rose start of the gradient) */
+  --color-violet-accent: #f97316;
+  --color-violet-bright: #fb7185;
 
-  /* Secondary accent — cyan/teal */
-  --color-cyan-accent: #22d3ee;
-  --color-teal-accent: #2dd4bf;
+  /* Secondary accent — amber */
+  --color-cyan-accent: #fbbf24;
+  --color-teal-accent: #fcd34d;
 
   /* Signal — used sparingly: availability dot, live badges, metrics */
   --color-signal: #34d399;
 
-  /* Text */
-  --color-ink: #f5f5f7;
-  --color-ink-muted: #a1a1aa;
-  /* 5.19:1 on --color-night. #71717a was 4.08:1 and failed WCAG AA. */
-  --color-ink-faint: #82828c;
+  /* Text on accent fills (buttons): dark, because white on amber fails contrast */
+  --color-on-accent: #1c0a02;
+
+  /* Text — warm whites/greys to match the base */
+  --color-ink: #fafaf9;
+  --color-ink-muted: #a8a29e;
+  /* ~5.2:1 on --color-night, passes WCAG AA for small text. */
+  --color-ink-faint: #8c857e;
 
   /* Hairlines on glass */
   --color-edge: rgba(255, 255, 255, 0.08);
@@ -122,7 +130,7 @@
 
   ::selection {
     background: var(--color-violet-accent);
-    color: #fff;
+    color: var(--color-on-accent);
   }
 
   /* Visible, on-brand focus ring — keyboard nav must never be a mystery */

@@ -21,8 +21,8 @@ import { AdaptiveDpr, PerformanceMonitor, Preload } from "@react-three/drei";
  * pointer type, reduced-motion and WebGL availability.
  */
 
-const VIOLET = new THREE.Color("#6d5dfc");
-const CYAN = new THREE.Color("#22d3ee");
+const VIOLET = new THREE.Color("#f97316");
+const CYAN = new THREE.Color("#fbbf24");
 
 /**
  * Deterministic PRNG (mulberry32).

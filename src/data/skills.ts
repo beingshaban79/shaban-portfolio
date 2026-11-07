@@ -54,8 +54,9 @@ export const skillGroups: SkillGroup[] = [
       "Flutter",
       "UIKit (Storyboard)",
       "Android (Java, XML layouts)",
+      "Godot 4 (GDScript) for 2D games",
     ],
-    primary: ["SwiftUI", "Flutter"],
+    primary: ["SwiftUI", "Flutter", "Godot 4 (GDScript) for 2D games"],
   },
   {
     id: "fullstack",

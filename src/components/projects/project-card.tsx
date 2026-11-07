@@ -40,7 +40,7 @@ export function ProjectCard({
           showed a brand mark sliced in half. A smaller, complete device is the
           only version that's correct for both.
         */}
-        <div className="relative flex h-80 items-center justify-center overflow-hidden rounded-t-panel border-b border-edge bg-[radial-gradient(ellipse_at_50%_115%,rgba(109,93,252,0.2),transparent_65%)]">
+        <div className="relative flex h-80 items-center justify-center overflow-hidden rounded-t-panel border-b border-edge bg-[radial-gradient(ellipse_at_50%_115%,rgba(249,115,22,0.18),transparent_65%)]">
           <div className="transition-transform duration-500 ease-[var(--ease-out-soft)] group-hover:-translate-y-1.5">
             <PhoneMockup
               src={cover?.src}
@@ -48,6 +48,7 @@ export function ProjectCard({
               size="xs"
               glow={false}
               note={cover ? undefined : project.screenshotNote}
+              bare={project.storeGraphics}
             />
           </div>
 

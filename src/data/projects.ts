@@ -70,6 +70,12 @@ export type Project = {
    * captured yet; that falls back to "Screenshot coming soon".
    */
   screenshotNote?: string;
+  /**
+   * The screenshots are finished store graphics that already include their own
+   * device frame and captions (taken from the Play Store / App Store listing).
+   * They render as plain rounded 9:16 cards instead of inside the phone mockup.
+   */
+  storeGraphics?: boolean;
   /** Set once you have footage — see step 3 above. */
   video: string | null;
   links: {
@@ -291,12 +297,20 @@ export const projects: Project[] = [
     context: "Astapor",
     year: "2025 – Present",
     /**
-     * Deliberately empty. The app blocks screen capture, so there are no
-     * screenshots and never will be — see `screenshotNote` below, which
-     * replaces the default "coming soon" text on the empty frame.
+     * The app blocks screen capture, so these are the official store graphics
+     * from the Play Store listing (they already include a device frame and
+     * captions, hence `storeGraphics`).
      */
-    screenshots: [],
-    screenshotNote: "Screen capture disabled in-app",
+    screenshots: [
+      { src: "/projects/lantis/01-vault.jpg", alt: "Store graphic: the Vault screen holding private chats and media, captioned Bury it deep" },
+      { src: "/projects/lantis/02-video-call.jpg", alt: "Store graphic: an in-app video call, captioned Seen but never exposed, end-to-end encrypted" },
+      { src: "/projects/lantis/03-voice-call.jpg", alt: "Store graphic: an in-app voice call screen, captioned Whispers stay hidden" },
+      { src: "/projects/lantis/04-auto-delete.jpg", alt: "Store graphic: the message expiry setting for auto-deleting messages" },
+      { src: "/projects/lantis/05-biometric-lock.jpg", alt: "Store graphic: authentication settings with passcode, Touch ID and Face ID" },
+      { src: "/projects/lantis/06-security-code.jpg", alt: "Store graphic: the security command code screen" },
+      { src: "/projects/lantis/07-contact.jpg", alt: "Store graphic: a contact profile with call, message and video call actions" },
+    ],
+    storeGraphics: true,
     video: null,
     /**
      * Region-neutral App Store URL (no country segment): Apple redirects each
@@ -387,6 +401,109 @@ export const projects: Project[] = [
       { src: "/projects/settle-it/03-verdict.webp", alt: "The verdict screen with the winner, the ruling, an animated savage meter and a shareable court-document card" },
       { src: "/projects/settle-it/04-courthouse.webp", alt: "The Courthouse feed sorted by hottest, with vote buttons gating each ruling behind a vote" },
       { src: "/projects/settle-it/05-history.webp", alt: "History screen locked behind premium, listing unlimited verdicts and custom judge modes" },
+    ],
+    video: null,
+    links: {},
+  },
+  {
+    slug: "lightwake",
+    name: "Lightwake — Laser Mirror Puzzle",
+    pitch:
+      "A calm logic puzzle: turn mirrors, bend the light, and wake every crystal. Each solve plays a little melody.",
+    description: [
+      "A minimalist puzzle game I designed and built under my own studio, Scorpius Labs. A light source fires a beam across the board, and you tap mirrors to turn them until the light reaches every crystal. Each crystal plays a note as it lights up, so every solve turns into a short tune. New pieces come in as you go: locked mirrors, prisms that split the beam, portals, and levels with two light sources.",
+      "There are three ways to play. A 40-level campaign on a constellation map, a Daily Light puzzle with a streak, and an Endless mode. Before building it I looked at the top laser puzzle games on Play and read their reviews. The common complaints were running out of levels, confusing controls and an ad after every level, so Lightwake has one tap per turn, no lives or timers, capped ads and plenty of content.",
+      "The part I'm most happy with is that every level is checked before it ships. The campaign, 730 daily puzzles and 300 endless puzzles are pre-built and verified by a Python solver and a Godot test suite, so no player ever gets an unsolvable board. The music is generated in the same key as the crystal notes, so the melody you make always fits the background track.",
+    ],
+    role:
+      "Solo project, start to finish: game design, all gameplay and UI code in Godot, the level generator and solver, the audio, AdMob integration and the Android release build. Built with AI tools (Claude Code) as part of my workflow, with every part reviewed and tested by me.",
+    track: "Personal",
+    platforms: ["Android"],
+    tech: [
+      "Godot 4 (GDScript)",
+      "Procedural level generation",
+      "Python solver & level verification",
+      "Automated tests",
+      "Generated music & SFX",
+      "Google AdMob",
+    ],
+    context: "Scorpius Labs (own studio)",
+    year: "2026",
+    screenshots: [
+      { src: "/projects/lightwake/01-home.jpg", alt: "Lightwake home screen with the Play orb, glowing light beams and Daily, Map and Endless buttons" },
+      { src: "/projects/lightwake/02-map.jpg", alt: "Nebula I constellation map showing completed levels with stars and the next level unlocked" },
+      { src: "/projects/lightwake/03-level-progress.jpg", alt: "Level 15 mid-play: the beam bounces off mirrors and lights the first crystal, with the new prism piece introduced" },
+      { src: "/projects/lightwake/04-win.jpg", alt: "Win screen with three stars: 2 moves, the fewest possible" },
+      { src: "/projects/lightwake/05-later-level.jpg", alt: "Level 34 with two light sources, portals, prisms and locked mirrors" },
+      { src: "/projects/lightwake/06-daily.jpg", alt: "Daily Light puzzle" },
+    ],
+    video: null,
+    links: {},
+  },
+  {
+    slug: "echolume",
+    name: "Echolume — Maze by Sound",
+    pitch:
+      "A relaxing maze game you play by echo: every step lights the walls for a moment, and every echo plays a note.",
+    description: [
+      "The maze is dark. Each step sends out a soft sonar ring, and for a second the walls light up around you, like echolocation. You remember what you saw, take the next step and find the green door. In Calm mode every echo plays a note, so each maze you solve becomes a small piece of music.",
+      "It has four modes. Calm has no timers and no losing, with 80 depths that grow as you go. Daily Maze is the same puzzle for everyone each day, with a step count and streak. Night Hunt makes your steps silent while something hunts you by the echoes you send. And Eyes Closed can be played with no picture at all: walls click from their side and the door chimes from its direction, using stereo sound and vibration.",
+      "Getting the Eyes Closed mode right was the interesting challenge. The game has to give enough directional information through audio and haptics alone for a maze to be solvable without looking. It works offline, needs no account, and ads only show between mazes or when the player chooses one.",
+    ],
+    role:
+      "Solo project: game design, Godot gameplay and UI, maze generation, stereo audio and haptics, AdMob integration, Play Store listing and release. Built with AI tools (Claude Code) as part of my workflow, reviewed and tested by me. Currently in closed testing on Google Play.",
+    track: "Personal",
+    platforms: ["Android"],
+    tech: [
+      "Godot 4 (GDScript)",
+      "Procedural maze generation",
+      "Stereo audio & haptics",
+      "Accessibility (audio-only mode)",
+      "Google AdMob",
+      "Play Console release",
+    ],
+    context: "Scorpius Labs (own studio)",
+    year: "2026",
+    screenshots: [
+      { src: "/projects/echolume/01-home.jpg", alt: "Echolume home screen" },
+      { src: "/projects/echolume/02-modes.jpg", alt: "Mode select: Calm, Daily Maze, Night Hunt and Eyes Closed" },
+      { src: "/projects/echolume/03-sonar.jpg", alt: "A sonar ring lighting up the maze walls around the player" },
+      { src: "/projects/echolume/04-night-hunt.jpg", alt: "Night Hunt mode: steps are silent and every echo can give you away" },
+      { src: "/projects/echolume/05-eyes-closed.jpg", alt: "Eyes Closed mode, played by sound and vibration" },
+      { src: "/projects/echolume/06-settings.jpg", alt: "Echolume settings screen" },
+    ],
+    video: null,
+    links: {},
+  },
+  {
+    slug: "just-this",
+    name: "Just This — Photo Guest Mode",
+    pitch:
+      "Show someone one photo without handing over your whole gallery. They can't swipe to anything else.",
+    description: [
+      "Everyone has handed their phone over to show one photo and watched the other person start swiping. Just This fixes that. You pick the photos you want to show, hand over the phone, and that's all they can see.",
+      "Spotlight lets you show only part of a photo, like one chat message or a ticket QR code, with everything else blurred out. The app can pin the screen so Home and Back are blocked, mute notifications while you're showing, and lock itself after 15, 30 or 60 seconds. If someone tries to get out, a snoop counter tells you how many times they tried. You can also share a photo from any gallery straight into the app.",
+      "Under the hood it uses a small native Android module I wrote for screen pinning (lock task mode) and Do Not Disturb, so the lock is real rather than just a full-screen view. It needs no gallery permission and no account, and photos never leave the phone.",
+    ],
+    role:
+      "Solo project: product research against competitors, Expo app, the native screen-pin module, share-sheet integration, UI design, AdMob and the Play Store release kit. Built with AI tools (Claude Code) as part of my workflow, reviewed and tested by me.",
+    track: "Personal",
+    platforms: ["Android"],
+    tech: [
+      "React Native (Expo)",
+      "Custom native module (Kotlin)",
+      "Android screen pinning",
+      "Share intent",
+      "Google AdMob",
+    ],
+    context: "Scorpius Labs (own studio)",
+    year: "2026",
+    screenshots: [
+      { src: "/projects/just-this/01-home.jpg", alt: "Just This home screen" },
+      { src: "/projects/just-this/02-ready.jpg", alt: "Ready to show screen with the selected photos and lock options" },
+      { src: "/projects/just-this/03-spotlight.jpg", alt: "Spotlight: boxing one chat message so only that part shows" },
+      { src: "/projects/just-this/04-spotlight-view.jpg", alt: "The guest's view, showing only the spotlighted part" },
+      { src: "/projects/just-this/05-nice-try.jpg", alt: "Nice try message after the guest tries to leave" },
     ],
     video: null,
     links: {},

@@ -45,6 +45,7 @@ export function PhoneMockup({
   priority = false,
   glow = true,
   note,
+  bare = false,
   className,
 }: {
   src?: string;
@@ -58,10 +59,49 @@ export function PhoneMockup({
    * so "coming soon" would be a promise that never lands. Pass the real reason.
    */
   note?: string;
+  /**
+   * The image is a finished store graphic that already contains its own device
+   * frame (e.g. a Play Store marketing screenshot). Render it as a plain rounded
+   * 9:16 card instead of putting a phone inside our phone.
+   */
+  bare?: boolean;
   className?: string;
 }) {
   const s = SIZES[size];
   const height = Math.round(s.w * ASPECT);
+
+  if (bare && src) {
+    // Store graphics are 1080×1920 (9:16).
+    const bareHeight = Math.round((s.w * 1920) / 1080);
+    return (
+      <div className={cn("relative shrink-0", className)} style={{ width: s.w }}>
+        {glow && (
+          <div
+            aria-hidden
+            className="absolute left-1/2 top-1/2 -z-1 h-[85%] w-[130%] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40 blur-[46px]"
+            style={{
+              background:
+                "linear-gradient(135deg, color-mix(in oklab, var(--color-violet-accent) 70%, transparent), color-mix(in oklab, var(--color-cyan-accent) 55%, transparent))",
+            }}
+          />
+        )}
+        <div
+          className="relative overflow-hidden border border-edge-strong shadow-[0_26px_60px_-22px_rgba(0,0,0,0.9)]"
+          style={{ width: s.w, height: bareHeight, borderRadius: s.r }}
+        >
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            sizes={`${s.w}px`}
+            priority={priority}
+            loading={priority ? undefined : "lazy"}
+            className="object-cover"
+          />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={cn("relative shrink-0", className)} style={{ width: s.w }}>
@@ -109,7 +149,7 @@ export function PhoneMockup({
                 className="object-cover object-top"
               />
             ) : (
-              <div className="flex size-full flex-col items-center justify-center gap-2 bg-[radial-gradient(circle_at_50%_45%,rgba(109,93,252,0.16),transparent_65%)] px-3 text-center">
+              <div className="flex size-full flex-col items-center justify-center gap-2 bg-[radial-gradient(circle_at_50%_45%,rgba(249,115,22,0.16),transparent_65%)] px-3 text-center">
                 {note ? (
                   <ShieldOff className="size-4 text-ink-faint" aria-hidden />
                 ) : (

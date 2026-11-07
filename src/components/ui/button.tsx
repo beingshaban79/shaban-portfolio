@@ -14,7 +14,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         gradient:
-          "accent-gradient text-white shadow-[0_8px_30px_-8px_rgba(109,93,252,0.7)] hover:shadow-[0_12px_44px_-8px_rgba(109,93,252,0.9)] hover:brightness-110 active:brightness-95",
+          "accent-gradient text-on-accent shadow-[0_8px_30px_-8px_rgba(249,115,22,0.7)] hover:shadow-[0_12px_44px_-8px_rgba(249,115,22,0.9)] hover:brightness-110 active:brightness-95",
         glass:
           "glass text-ink hover:border-edge-strong hover:bg-white/[0.07] active:bg-white/[0.04]",
         outline:

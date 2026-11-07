@@ -143,7 +143,7 @@ export function Nav() {
               href="#home"
               className="group flex items-center gap-2.5 font-display text-sm font-semibold tracking-tight"
             >
-              <span className="grid size-8 place-items-center rounded-lg accent-gradient text-xs font-bold text-white">
+              <span className="grid size-8 place-items-center rounded-lg accent-gradient text-xs font-bold text-on-accent">
                 MS
               </span>
               <span className="hidden text-ink sm:inline">

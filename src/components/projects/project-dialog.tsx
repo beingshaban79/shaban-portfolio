@@ -117,6 +117,7 @@ export function ProjectDialog({
             shots={project.screenshots}
             size="md"
             note={project.screenshotNote}
+            bare={project.storeGraphics}
           />
         </div>
 

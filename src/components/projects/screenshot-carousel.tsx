@@ -16,12 +16,15 @@ export function ScreenshotCarousel({
   shots,
   size = "md",
   note,
+  bare = false,
   className,
 }: {
   shots: { src: string; alt: string }[];
   size?: "sm" | "md" | "lg";
   /** Shown on the empty frame when a project has no screenshots. */
   note?: string;
+  /** Screenshots are store graphics with their own frame — see PhoneMockup. */
+  bare?: boolean;
   className?: string;
 }) {
   const track = React.useRef<HTMLDivElement>(null);
@@ -75,6 +78,7 @@ export function ScreenshotCarousel({
               alt={shot.alt}
               size={size}
               priority={i === 0}
+              bare={bare}
             />
           </div>
         ))}
